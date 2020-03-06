@@ -1,7 +1,7 @@
 # Be careful! This script might run for a long time (~2 hours).
 
-from q_learning_train import QLearningTrain
-from sarsa_train import SarsaTrain
+from trainers.q_learning_train import QLearningTrain
+from trainers.sarsa_train import SarsaTrain
 import json
 
 # Reinforcement learning parameters
@@ -33,7 +33,7 @@ for tau_init in tau_inits:
                     avg_val_best_score = 0
                     avg_val_avg_score = 0
                     for i in range(nb_train):
-                        train = QLearningTrain(tau_init, tau_decay, alpha_init, 
+                        train = QLearningTrain(tau_init, tau_decay, alpha_init,
                             alpha_decay, gamma, decay_rate, size_x, size_y)
                         for iter in range(training_size):
                             train.iterate(visual=False)
