@@ -23,14 +23,14 @@ size_x = 40
 size_y = 25
 
 learning_rate = 0.00005
-train = SarsaTrain(epsilon_init, epsilon_decay, alpha_init, alpha_decay,
-    gamma, decay_rate, size_x, size_y)
+# train = SarsaTrain(epsilon_init, epsilon_decay, alpha_init, alpha_decay,
+#     gamma, decay_rate, size_x, size_y)
 
-# train = QLearningTrain(tau_init, tau_decay, alpha_init, alpha_decay,
-#    gamma, decay_rate, size_x, size_y)
+train = QLearningTrain(tau_init, tau_decay, alpha_init, alpha_decay,
+   gamma, decay_rate, size_x, size_y)
 
 # train = DQLTrain(epsilon_init, epsilon_decay, learning_rate,
-#    gamma, decay_rate, size_x, size_y, load_model_path="weights_trained.pth")
+#    gamma, decay_rate, size_x, size_y, load_model_path="pretrained_models/trained_weights.pth")
 
 # Main logic
 iter = 0
