@@ -6,12 +6,14 @@ from trainers.abctrain import abcTrain
 class SarsaTrain(abcTrain):
 
     def __init__(self, epsilon_init, epsilon_decay, alpha_init, alpha_decay,
-                    gamma, decay_rate, size_x, size_y):
+                    gamma, decay_rate, size_x, size_y, q_dict=None):
 
         super().__init__(gamma, decay_rate, size_x, size_y, False)
 
         # Training data
         self.q_dict = {}
+        if q_dict:
+            self.q_dict = q_dict
         self.epsilon = epsilon_init
         self.epsilon_decay = epsilon_decay
         self.alpha = alpha_init

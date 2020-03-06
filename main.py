@@ -6,7 +6,7 @@ from trainers.q_learning_state_epsilon_train import QLearningStateEpsilonTrain
 import time
 import numpy as np
 import matplotlib.pyplot as plt
-from utils.helpers import export_q_table
+from utils.helpers import export_q_table, import_q_table
 
 # Reinforcement learning parameters
 epsilon_init = 0.2
@@ -24,17 +24,21 @@ size_x = 40
 size_y = 25
 
 learning_rate = 0.00005
-# train = SarsaTrain(epsilon_init, epsilon_decay, alpha_init, alpha_decay,
-#     gamma, decay_rate, size_x, size_y)
 
-# train = QLearningTrain(tau_init, tau_decay, alpha_init, alpha_decay,
-#    gamma, decay_rate, size_x, size_y)
+# import pretrained q_dict
+# q_dict_imported = import_q_table("pretrained_models/q_table.json")
+
+# train = SarsaTrain(epsilon_init, epsilon_decay, alpha_init, alpha_decay,
+#     gamma, decay_rate, size_x, size_y, q_dict=None)
+
+train = QLearningTrain(tau_init, tau_decay, alpha_init, alpha_decay,
+   gamma, decay_rate, size_x, size_y)
 
 # train = QLearningStateEpsilonTrain(epsilon_init, epsilon_decay, alpha_init, alpha_decay,
 #      gamma, decay_rate, size_x, size_y)
 
-train = DQLTrain(epsilon_init, epsilon_decay, learning_rate,
-   gamma, decay_rate, size_x, size_y, load_model_path="pretrained_models/trained_weights.pth")
+# train = DQLTrain(epsilon_init, epsilon_decay, learning_rate,
+#    gamma, decay_rate, size_x, size_y, load_model_path="pretrained_models/trained_weights.pth")
 
 # Main logic
 iter = 0
