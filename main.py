@@ -2,6 +2,7 @@ import torch
 from trainers.sarsa_train import SarsaTrain
 from trainers.q_learning_train import QLearningTrain
 from trainers.dql_train import DQLTrain
+from trainers.q_learning_state_epsilon_train import QLearningStateEpsilonTrain
 import time
 import numpy as np
 import matplotlib.pyplot as plt
@@ -26,11 +27,14 @@ learning_rate = 0.00005
 # train = SarsaTrain(epsilon_init, epsilon_decay, alpha_init, alpha_decay,
 #     gamma, decay_rate, size_x, size_y)
 
-train = QLearningTrain(tau_init, tau_decay, alpha_init, alpha_decay,
-   gamma, decay_rate, size_x, size_y)
+# train = QLearningTrain(tau_init, tau_decay, alpha_init, alpha_decay,
+#    gamma, decay_rate, size_x, size_y)
 
-# train = DQLTrain(epsilon_init, epsilon_decay, learning_rate,
-#    gamma, decay_rate, size_x, size_y, load_model_path="pretrained_models/trained_weights.pth")
+# train = QLearningStateEpsilonTrain(epsilon_init, epsilon_decay, alpha_init, alpha_decay,
+#      gamma, decay_rate, size_x, size_y)
+
+train = DQLTrain(epsilon_init, epsilon_decay, learning_rate,
+   gamma, decay_rate, size_x, size_y, load_model_path="pretrained_models/trained_weights.pth")
 
 # Main logic
 iter = 0
