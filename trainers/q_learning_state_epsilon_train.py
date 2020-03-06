@@ -33,7 +33,6 @@ class QLearningStateEpsilonTrain(abcTrain):
         super().choose_action(state)
         try:
             eps = self.eps_dict[state]
-            print(eps)
         except KeyError:
             eps = self.epsilon_init
         sample = (np.random.uniform() < eps)
