@@ -1,7 +1,7 @@
 import torch
-from sarsa_train import SarsaTrain
-from q_learning_train import QLearningTrain
-from dql_train import DQLTrain
+from trainers.sarsa_train import SarsaTrain
+from trainers.q_learning_train import QLearningTrain
+from trainers.dql_train import DQLTrain
 import time
 import numpy as np
 import matplotlib.pyplot as plt
