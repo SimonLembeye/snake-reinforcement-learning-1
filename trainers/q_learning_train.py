@@ -1,10 +1,10 @@
 from direction import Direction
 import random
-from abctrain import abcTrain
+from trainers.abctrain import abcTrain
 import numpy as np
 
 class QLearningTrain(abcTrain):
-    
+
     def __init__(self, tau_init, tau_decay, alpha_init, alpha_decay,
                     gamma, decay_rate, size_x, size_y):
 
@@ -25,7 +25,7 @@ class QLearningTrain(abcTrain):
             if self.tau > 0.2:
                 self.tau *= self.tau_decay
             self.alpha *= self.alpha_decay
-    
+
     # Implement abstract method
     def get_state(self):
         super().get_state()
@@ -44,11 +44,11 @@ class QLearningTrain(abcTrain):
         if state2 not in self.q_dict:
             self.q_dict[state2] = dict.fromkeys(list(Direction), 0)
         prev = self.q_dict[state][action]
-        
+
         #Q-learning update
         self.q_dict[state][action] = prev + self.alpha * (
-            self.reward + 
-            self.gamma * self.q_dict[state2][max(self.q_dict[state2], 
+            self.reward +
+            self.gamma * self.q_dict[state2][max(self.q_dict[state2],
                 key=self.q_dict[state2].get)] - prev
         )
 
@@ -129,10 +129,9 @@ class QLearningTrain(abcTrain):
 
     def _softmax(self, state):
         try:
-            weights = np.array([np.exp(self.q_dict[state][action]/self.tau) 
+            weights = np.array([np.exp(self.q_dict[state][action]/self.tau)
                                     for action in list(Direction)])
             wsum = sum(weights)
             return weights/wsum
         except KeyError:
             return np.array([1/4,1/4,1/4,1/4])
-    

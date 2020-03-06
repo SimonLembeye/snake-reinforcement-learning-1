@@ -1,10 +1,10 @@
 from direction import Direction
 import random
 from visual import Visual
-from abctrain import abcTrain
+from trainers.abctrain import abcTrain
 
 class SarsaTrain(abcTrain):
-    
+
     def __init__(self, epsilon_init, epsilon_decay, alpha_init, alpha_decay,
                     gamma, decay_rate, size_x, size_y):
 

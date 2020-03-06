@@ -2,14 +2,14 @@ import torch
 import numpy as np
 import random
 from direction import Direction
-from abctrain import abcTrain
+from trainers.abctrain import abcTrain
 from deep_learning_models import *
 
 class DQLTrain(abcTrain):
 
     def __init__(self, epsilon, epsilon_decay, learning_rate,
                     gamma, decay_rate, size_x, size_y,
-                    batch_size=64, memory_size=10000, save_weight_frequency=10, 
+                    batch_size=64, memory_size=10000, save_weight_frequency=10,
                     load_model_path=""):
 
         super().__init__(gamma, decay_rate, size_x, size_y, True)
@@ -20,7 +20,7 @@ class DQLTrain(abcTrain):
         self.epsilon_decay = epsilon_decay
 
         # NN init
-        self.device = torch.device("cuda:0" 
+        self.device = torch.device("cuda:0"
                         if torch.cuda.is_available() else "cpu")
         self.policy_net = Net()
         self.target_net = Net()
@@ -28,7 +28,7 @@ class DQLTrain(abcTrain):
             self.policy_net.load_state_dict(torch.load(load_model_path))
         self.target_net.load_state_dict(self.policy_net.state_dict())
         self.target_net.eval()
-        self.optimizer = torch.optim.Adam(self.policy_net.parameters(), 
+        self.optimizer = torch.optim.Adam(self.policy_net.parameters(),
                                             lr=self.learning_rate)
         self.loss_fn = torch.nn.MSELoss()
         self.memory = ReplayMemory(memory_size)
@@ -46,7 +46,7 @@ class DQLTrain(abcTrain):
     def get_state(self):
         super().get_state()
         return torch.tensor(np.concatenate((
-            self.get_environment_mat().reshape(1,-1), 
+            self.get_environment_mat().reshape(1,-1),
             self.get_food_vect().reshape(1,-1)), axis=1))
 
     # Implement abstract method
@@ -61,7 +61,7 @@ class DQLTrain(abcTrain):
         else:
             action = Direction.random()
         return action
-    
+
     # Implement abstract method
     def handle_deep_learning(self, state1, state2, action1, reward):
         super().handle_deep_learning(state1, state2, action1, reward)
@@ -73,7 +73,7 @@ class DQLTrain(abcTrain):
 
         if self.iter % self.save_weight_frequency == 0:
             self.target_net.load_state_dict(self.policy_net.state_dict())
-    
+
     # Implement abstract method
     def print_recap(self):
         super().print_recap()
@@ -96,7 +96,7 @@ class DQLTrain(abcTrain):
         return danger
 
     def in_danger(self, cell):
-        if (cell[0] < 0 or cell[0] > self.size_x-1 or 
+        if (cell[0] < 0 or cell[0] > self.size_x-1 or
                 cell[1] < 0 or cell[1] > self.size_y-1):
             return True
 
@@ -144,8 +144,8 @@ class DQLTrain(abcTrain):
         next_state_batch = torch.cat(batch.next_state).to(self.device)
 
         expected_values = (self.target_net(
-                            next_state_batch[:, :49], 
-                            next_state_batch[:, 49:]).max(1)[0] * self.gamma 
+                            next_state_batch[:, :49],
+                            next_state_batch[:, 49:]).max(1)[0] * self.gamma
                                 + reward_batch)
 
         indices = action_batch.squeeze()
