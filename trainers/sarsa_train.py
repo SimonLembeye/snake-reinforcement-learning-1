@@ -1,6 +1,6 @@
-from direction import Direction
+from utils.direction import Direction
 import random
-from visual import Visual
+from utils.visual import Visual
 from trainers.abctrain import abcTrain
 
 class SarsaTrain(abcTrain):

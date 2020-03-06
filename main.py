@@ -5,7 +5,7 @@ from trainers.dql_train import DQLTrain
 import time
 import numpy as np
 import matplotlib.pyplot as plt
-from helpers import export_q_table
+from utils.helpers import export_q_table
 
 # Reinforcement learning parameters
 epsilon_init = 0.2
@@ -37,7 +37,7 @@ iter = 0
 start_time = time.monotonic()
 try:
     while True:
-        if (iter % 5000 > 4998):
+        if (iter % 1000 > 998):
             train.iterate(visual=True, speed=25)
         train.iterate(visual=False)
         iter += 1

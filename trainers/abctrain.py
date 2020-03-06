@@ -1,6 +1,6 @@
-from direction import Direction
+from utils.direction import Direction
 import random
-from visual import Visual
+from utils.visual import Visual
 from abc import ABC, abstractmethod
 
 class abcTrain(ABC):
@@ -83,7 +83,7 @@ class abcTrain(ABC):
         self.avg_scores.append(self.sum_score/self.decay_rate)
         self.best_scores.append(self.best_score)
 
-    def iterate(self, visual=False, speed=0, test=False, reward_plus=100, 
+    def iterate(self, visual=False, speed=0, test=False, reward_plus=100,
                     reward_minus=-200, nb_step_max=250):
         if visual and speed == 0:
             raise Error("Usage: train.iterate(visual=True, speed=speed)")
@@ -142,10 +142,10 @@ class abcTrain(ABC):
             # Update data
             if not test:
                 if self.use_deep_learning:
-                    self.handle_deep_learning(self.state, new_state, 
+                    self.handle_deep_learning(self.state, new_state,
                                                 self.action, self.reward)
                 else:
-                    self.update_q_dict(self.state, new_state, 
+                    self.update_q_dict(self.state, new_state,
                                         self.action, new_action)
             self.action = new_action
             self.state = new_state

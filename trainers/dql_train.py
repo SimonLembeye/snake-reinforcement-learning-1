@@ -1,9 +1,9 @@
 import torch
 import numpy as np
 import random
-from direction import Direction
+from utils.direction import Direction
 from trainers.abctrain import abcTrain
-from deep_learning_models import *
+from utils.deep_learning_models import *
 
 class DQLTrain(abcTrain):
 

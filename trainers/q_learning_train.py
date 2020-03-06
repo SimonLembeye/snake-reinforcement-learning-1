@@ -1,4 +1,4 @@
-from direction import Direction
+from utils.direction import Direction
 import random
 from trainers.abctrain import abcTrain
 import numpy as np
