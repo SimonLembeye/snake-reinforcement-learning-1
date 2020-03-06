@@ -30,7 +30,7 @@ train = SarsaTrain(epsilon_init, epsilon_decay, alpha_init, alpha_decay,
 #    gamma, decay_rate, size_x, size_y)
 
 # train = DQLTrain(epsilon_init, epsilon_decay, learning_rate,
-#    gamma, decay_rate, size_x, size_y)
+#    gamma, decay_rate, size_x, size_y, load_model_path="weights_trained.pth")
 
 # Main logic
 iter = 0
@@ -44,16 +44,16 @@ try:
 
 except KeyboardInterrupt:
     if not train.use_deep_learning:
-        print("[!] Received interruption signal. Time elapsed : %ds" % 
+        print("[!] Received interruption signal. Time elapsed : %ds" %
                 (time.monotonic() - start_time))
-        
+
         # Plot results
         t = np.arange(0, iter, train.decay_rate)
 
         fig, ax = plt.subplots()
         ax.plot(t[:-1], train.avg_scores)
 
-        ax.set(xlabel='Number of episodes', 
+        ax.set(xlabel='Number of episodes',
                 ylabel='Average score over the last {} iterations'.format(
                     train.decay_rate),
                 title='Evolution of average score across episodes')
